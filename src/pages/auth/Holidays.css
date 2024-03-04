@@ -1,0 +1,34 @@
+.holiday-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .holiday-list-table {
+    width: 70%;
+    max-width: 800px;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .holiday-list-table th, .holiday-list-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .holiday-list-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .holiday-list-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .holiday-list-title {
+    margin-bottom: 10px;
+  }
+  
