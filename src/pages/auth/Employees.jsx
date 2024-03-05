@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Employees.css'; // Make sure to create and import the CSS file
 import '@fortawesome/fontawesome-free/css/all.css';
 
 const CategoriesTable = () => {
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+  // Function to handle delete confirmation
+  const handleDeleteConfirmation = () => {
+    // Logic to delete the employee if confirmed
+    // Implement your delete logic here
+
+    // Close the delete confirmation popup
+    setShowDeleteConfirmation(false);
+  };
+
   return (
     <section>
       <div className="head">
@@ -35,7 +46,7 @@ const CategoriesTable = () => {
               <td>
                 <span className="view-icon"><i className="fas fa-eye"></i></span>
                 <span className="edit-icon"><i className="fas fa-pen"></i></span>
-                <span className="delete-icon"><i className="fas fa-trash"></i></span>
+                <span className="delete-icon" onClick={() => setShowDeleteConfirmation(true)}><i className="fas fa-trash"></i></span>
               </td>
             </tr>
             <tr>
@@ -46,10 +57,9 @@ const CategoriesTable = () => {
               <td>
                 <span className="view-icon"><i className="fas fa-eye"></i></span>
                 <span className="edit-icon"><i className="fas fa-pen"></i></span>
-                <span className="delete-icon"><i className="fas fa-trash"></i></span>
+                <span className="delete-icon" onClick={() => setShowDeleteConfirmation(true)}><i className="fas fa-trash"></i></span>
               </td>
             </tr>
-            
           </tbody>
         </table>
         <div className="footer">
@@ -65,8 +75,20 @@ const CategoriesTable = () => {
           </span>
         </div>
       </div>
+      
+      {/* Delete Confirmation Popup */}
+      {showDeleteConfirmation && (
+        <div className="delete-confirmation">
+          <div className="confirmation-box">
+            <p>Are you sure you want to delete this employee?</p>
+            <div>
+              <button onClick={handleDeleteConfirmation}>Yes</button>
+              <button onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
-    
   );
 };
 
