@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       // Make POST request
-      const response = await axios.post('http://localhost:8020/api/superadmin/login', {
+      const response = await axios.post('http://localhost:3000/api/superadmin/login', {
         email,
         password,
       });

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-import { Link } from 'react-router-dom'; 
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   const handleToggleSidebar = () => {
@@ -17,27 +17,25 @@ const Sidebar = () => {
   };
 
   return (
-    <body> <img className='imge' src={require('./ilomaimg.jpg')} alt="" /> 
     <div className="sidebar">
       <div className="all">
         <div className="logo_content">
           <div className="logo">
             <header>
               <img src={require('./ilomaLogo.webp')} alt="" />
-             
+              <p>Iloma</p>
             </header>
           </div>
           <i className="bx bx-menu" id="btn" onClick={handleToggleSidebar}></i>
         </div>
 
         <ul className="nav_list">
-          
-        <li><Link to ="/dashboard" ><i className="bx bx-grid-alt"></i><span className="links_name">Dashboard</span></Link></li>
-          <li><Link to ="/employee"><i className="bx bx-user"></i><span className="links_name">Employees</span></Link></li>
-          <li><Link to ="/holidays"><i className="bx bx-pie-chart-alt-2"></i><span className="links_name">Holidays</span></Link></li>
-          <li><a href="#"><i className="bx bx-chat"></i><span className="links_name">Leaves</span></a></li>
-          <li><a href="#"><i className="bx bx-cart-alt"></i><span className="links_name">About US</span></a></li>
-          </ul>
+          <li><NavLink to="/dashboard"><i className="bx bx-grid-alt"></i><span className="links_name">Dashboard</span></NavLink></li>
+          <li><NavLink to="/employee"><i className="bx bx-user"></i><span className="links_name">Employee</span></NavLink></li>
+          <li><NavLink to="/holiday"><i className="bx bx-chat"></i><span className="links_name">Holiday</span></NavLink></li>
+          <li><NavLink to="/leaves"><i className="bx bx-pie-chart-alt-2"></i><span className="links_name">Leaves</span></NavLink></li>
+          <li><NavLink to="/about"><i className="bx bx-folder"></i><span className="links_name">About</span></NavLink></li>
+        </ul>
       </div>
 
       <div className="profile_content">
@@ -49,11 +47,10 @@ const Sidebar = () => {
               <a href="#"><i className="bx bxl-instagram"></i></a>
             </div>
           </div>
-          <i className="bx bx-log-out"  id="log_out"></i>
+          <i className="bx bx-log-out" id="log_out"></i>
         </div>
       </div>
     </div>
-    </body>
   );
 };
 
