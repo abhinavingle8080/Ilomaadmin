@@ -42,9 +42,12 @@ const CategoriesTable = () => {
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewEmployee({ ...newEmployee, [name]: value });
+  const handleInputChange = (e, fieldName) => {
+    const { value } = e.target;
+    setNewEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      [fieldName]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -124,11 +127,11 @@ const CategoriesTable = () => {
         <form className="create-employee-form" onSubmit={handleSubmit}>
           <div>
             <label>First Name:</label>
-            <input type="text" name="first_name" value={newEmployee.first_name} onChange={handleInputChange} required />
+            <input type="text" name="first_name" value={newEmployee.first_name}   onChange={(e) => handleInputChange(e, 'first_name')}required />
           </div>
           <div>
             <label>Last Name:</label>
-            <input type="text" name="last_name" value={newEmployee.last_name} onChange={handleInputChange} required />
+            <input type="text" name="last_name" value={newEmployee.last_name} onChange={(e) => handleInputChange(e, 'last_name')} required />
           </div>
           <div>
             <label>Email:</label>
