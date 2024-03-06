@@ -17,8 +17,7 @@ const Sidebar = () => {
   };
 
   return (
-    <body>
-      {" "}
+    
       <div className="sidebar">
         <div className="all">
           <div className="logo_content">
@@ -87,7 +86,6 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </body>
   );
 };
 
