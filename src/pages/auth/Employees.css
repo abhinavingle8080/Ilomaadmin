@@ -1,12 +1,13 @@
 section{
     margin-top: 8%;
      margin-left: 25%;
+     overflow-y: auto; 
 }
 body{
     position: relative;
     min-height: 100vh;
     width: 100%;
-    overflow: hidden;
+    overflow-y: auto;
   }
 .head{
     display: inline;
@@ -22,12 +23,12 @@ body{
     font-size: 12px;
     font-weight: bold;
     border-radius: 5px;
-    margin-left: 40%;
-    padding: 5px 15px;
+    margin-left: 50%;
+    padding: 10px 15px;
     width : 30%;
 }
 .table-data{
-    width: 70%;
+    width: 80%;
     margin-top: 10px;
     padding: 15px 10px;
     background-color: #faf7f7;
@@ -35,8 +36,19 @@ body{
     border-radius: 13px;
 }
 .search-bar{
-   margin-left: 72%;
-}
+    
+        width: 100%; 
+      }
+      
+      
+      @media only screen and (max-width: 600px) {
+        .search-bar {
+          width: 90%; 
+          margin: 0 auto; 
+          max-width: 300px; 
+        }
+      }
+
 .search-bar input{
     width: 200px;
     padding: 10px;
@@ -188,4 +200,95 @@ th {
     background-color: #52565a; /* Grey color for cancel button */
     color: #fff;
   }
+  /* Employees.css */
+
+.create-employee-form {
+    margin-top: 20px;
+    overflow-y: auto; 
+  }
+  
+  .create-employee-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .create-employee-form input {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .create-employee-form .form-buttons {
+    margin-top: 20px;
+    width : 70%;
+    margin-bottom: 5px;
+  }
+  
+  .create-employee-form button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .create-employee-form button[type="submit"] {
+    background-color: rgb(54, 165, 56);
+    color: #fff;
+  }
+  
+  .create-employee-form button[type="button"] {
+    background-color: #52565a;
+    color: #fff;
+  }
+  .sub-button{
+    margin-bottom: 5px;
+  }
+ 
+.table-data table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.table-data th {
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: left;
+}
+
+
+.table-data td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+@media only screen and (max-width: 600px) {
+ 
+  .table-data th {
+    display: none;
+  }
+
+  
+  .table-data td {
+    display: block;
+    text-align: right; 
+  }
+
+  
+  .table-data tr {
+    border-bottom: none;
+  }
+
+  
+  .table-data td {
+    padding: 10px;
+  }
+}
+
   
