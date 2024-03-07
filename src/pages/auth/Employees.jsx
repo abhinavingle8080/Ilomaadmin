@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Employees.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { NavLink } from "react-router-dom";
+
 
 const CategoriesTable = () => {
   const [employees, setEmployees] = useState([]);
@@ -42,51 +44,7 @@ const CategoriesTable = () => {
     }
   };
 
-  const handleInputChange = (e, fieldName) => {
-    const { value } = e.target;
-    setNewEmployee((prevEmployee) => ({
-      ...prevEmployee,
-      [fieldName]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const accessToken = localStorage.getItem('accessToken');
-      const response = await axios.post('http://localhost:8020/api/superadmin/create-employee', {
-        first_name: '',
-        last_name: '',
-        email: '',
-        gender: '',
-        dob: '',
-        phone_no: '',
-        country_code: '',
-        address: ''
-      }, {
-          headers: {
-              'Authorization': `Bearer ${accessToken}`,
-              'Content-Type': 'application/json'
-          }
-      });
-      // Update the employee list after creating a new employee
-      setShowCreateForm(false);
-      setNewEmployee({
-        first_name: '',
-        last_name: '',
-        email: '',
-        gender: '',
-        dob: '',
-        phone_no: '',
-        country_code: '',
-        address: ''
-      });
-      getAllEmployees(); // This will refresh the employee list
-
-    } catch (error) {
-      console.error('Error creating employee:', error);
-    }
-  };
+ 
   
 
   const handleDeleteConfirmation = (employee) => {
@@ -120,50 +78,10 @@ const CategoriesTable = () => {
         <h3>Employees</h3>
         <h5> Employees List</h5>
         <div>
-          <button className='createCategory' onClick={() => setShowCreateForm(true)}> + Create New Employee</button>
+          <button className='createCategory' onClick={() => setShowCreateForm(true)}  ><NavLink to="/employee/newemployee"> + Create New Employee</NavLink></button>
         </div>
       </div>
-      {showCreateForm && (
-        <form className="create-employee-form" onSubmit={handleSubmit}>
-          <div>
-            <label>First Name:</label>
-            <input type="text" name="first_name" value={newEmployee.first_name}   onChange={(e) => handleInputChange(e, 'first_name')}required />
-          </div>
-          <div>
-            <label>Last Name:</label>
-            <input type="text" name="last_name" value={newEmployee.last_name} onChange={(e) => handleInputChange(e, 'last_name')} required />
-          </div>
-          <div>
-            <label>Email:</label>
-            <input type="text" name="email" value={newEmployee.email} onChange={handleInputChange} required />
-          </div>
-          <div>
-            <label>Gender:</label>
-            <input type="text" name="gender" value={newEmployee.gender} onChange={handleInputChange} required />
-          </div>
-          <div>
-            <label>DOB:</label>
-            <input type="text" name="dob" value={newEmployee.dob} onChange={handleInputChange} required />
-          </div>
-          <div>
-            <label>phone_no:</label>
-            <input type="text" name="phone_no" value={newEmployee.phone_no} onChange={handleInputChange} required />
-          </div>
-          <div>
-            <label>country_code:</label>
-            <input type="text" name="country_code" value={newEmployee.country_code} onChange={handleInputChange} required />
-          </div>
-          <div>
-            <label>address:</label>
-            <input type="text" name="address" value={newEmployee.address} onChange={handleInputChange} required />
-          </div>
-
-          <div className="form-buttons">
-          <button className="sub-button" type="submit">Submit</button>
-            <button className="cancel-button" type="button" onClick={() => setShowCreateForm(false)}>Cancel</button>
-          </div>
-        </form>
-      )}
+      
       <div className="table-data">
         <div className="search-bar">
           <input type="search" name="search" placeholder="Search ..." />
@@ -186,7 +104,7 @@ const CategoriesTable = () => {
                 <td>{employee.email}</td>
                 <td className="ac">Active</td>
                 <td>
-                  <span className="view-icon"><i className="fas fa-eye"></i></span>
+                  < NavLink to ={`/employee/${employee.id}`} className="view-icon" style={{ color: 'black'}}><i className="fas fa-eye"></i></NavLink>
                   <span className="edit-icon"><i className="fas fa-pen"></i></span>
                   <span className="delete-icon" onClick={() => handleDeleteConfirmation(employee)}><i className="fas fa-trash"></i></span>
                 </td>
