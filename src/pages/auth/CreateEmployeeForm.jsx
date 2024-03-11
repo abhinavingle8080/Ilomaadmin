@@ -55,7 +55,7 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
     e.preventDefault();if(isEdit){
       try{
       const accessToken = localStorage.getItem('accessToken');
-      await axios.post('http://localhost:8020/api/superadmin/update-employee', newEmployee, {
+      await axios.post(`http://localhost:8020/api/superadmin/update-employee`, newEmployee, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       await axios.post(
-        "http://localhost:8020/api/superadmin/create-employee",
+        `http://localhost:8020/api/superadmin/create-employee`,
         newEmployee,
         {
           headers: {

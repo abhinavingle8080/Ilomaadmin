@@ -11,7 +11,7 @@ import Viewemployee from "./pages/auth/Viewemployee";
 import Viewholiday from  "./pages/auth/Viewholiday";
 import Newholiday from "./pages/auth/Newholiday";
 import Newleave from "./pages/auth/Newleave";
-
+import Viewleave from "./pages/auth/Viewleave";
 // First, I want to show the login page, and after login, I want to show the sidebar.
 // I want sidebar to remain constant on every page.
 
@@ -45,6 +45,7 @@ function AuthenticatedRoutes() {
         <Route path ="/holiday/Newholiday" element={<Newholiday />}/>
         <Route path ="/leaves" element = {<Leaves/>}/>
         <Route path ="/leaves/newleave" element={<Newleave/>}/>
+        <Route path ="/viewleave/:leaveRequestId" element={<Viewleave/>}/>
       </Routes>
     </>
   );

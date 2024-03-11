@@ -101,7 +101,7 @@ const LeavePage = () => {
                 <td>{leaveRequest.duration}</td>
                 <td>{leaveRequest.reason}</td>
                 <td>
-                  <span className="view-icon" ><i className="fas fa-eye"></i></span>
+                < NavLink to ={`/viewleave/${leaveRequest.id}`} className="view-icon" style={{ color: 'black'}}><i className="fas fa-eye"></i></NavLink>
                   <span className="edit-icon" ><i className="fas fa-pen"></i></span>
                   <span className="delete-icon" onClick={() => handleDeleteConfirmation(leaveRequest)}><i className="fas fa-trash"></i></span>
                 </td>
