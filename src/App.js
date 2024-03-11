@@ -5,7 +5,7 @@ import Holiday from "./pages/auth/Holidays";
 import Employee from "./pages/auth/Employees";
 import Leaves from "./pages/auth/Leaves"
 import Login from "./pages/auth/Login";
-import Newemployee from "./pages/auth/CreateEmployeeForm";
+import CreateEmployeeForm from "./pages/auth/CreateEmployeeForm";
 import Viewemployee from "./pages/auth/Viewemployee";
 //import Editemployee from "./pages/auth/Editemployee";
 import Viewholiday from  "./pages/auth/Viewholiday";
@@ -38,8 +38,8 @@ function AuthenticatedRoutes() {
       <Routes>
         <Route path="/holiday" element={<Holiday />} />
         <Route path="/employee" element={<Employee />} />
-        <Route path ="/employee/newemployee" element={<Newemployee />}/>
-        <Route path ="/employee/edit/:id" element={<Newemployee />}/>
+        <Route path ="/employee/newemployee" element={<CreateEmployeeForm />}/>
+        <Route path ="/employee/edit/:id" element={<CreateEmployeeForm />}/>
         <Route path ="/employee/:employeeId" element={<Viewemployee />} />
         <Route path="/viewholiday/:holidayId" element={<Viewholiday />} />
         <Route path ="/holiday/Newholiday" element={<Newholiday />}/>

@@ -26,7 +26,8 @@ const Login = () => {
       });
 
       // Handle success
-      console.log('Login successful', response.data);
+
+      localStorage.setItem('accessToken', response.data.token);
       setLoggedIn(true);
       // You can redirect the user or perform any other action upon successful login
     } catch (error) {

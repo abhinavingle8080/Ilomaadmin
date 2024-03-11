@@ -1,14 +1,14 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Employees.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { NavLink,useParams,useLocation } from "react-router-dom";
+import { NavLink, useParams, useLocation } from "react-router-dom";
 
 const CreateEmployeeForm = ({ getAllEmployees }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const {pathname} = useLocation();
-   const isEdit = pathname.includes(`edit`);
-   const {id} = useParams();
+  const { pathname } = useLocation();
+  const isEdit = pathname.includes(`edit`);
+  const { id } = useParams();
   const [newEmployee, setNewEmployee] = useState({
     first_name: "",
     last_name: "",
@@ -27,31 +27,35 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
       [fieldName]: value,
     }));
   };
- console.log("edit form",id);
-  useEffect( () => { const fetchEmployeeDetails = async () => {
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.post(
-        `http://localhost:8020/api/superadmin/get-employee`,
-        {
-          employee_id: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
+  console.log("edit form", id);
+  useEffect(() => {
+    const fetchEmployeeDetails = async () => {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        const response = await axios.post(
+          `http://localhost:8020/api/superadmin/get-employee`,
+          {
+            employee_id: id,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      setNewEmployee(response?.data?.data?.employee); // Set the employee details in state
-    } catch (error) {
-      console.error("Error fetching employee details:", error);
-    }
-  };
-    
-  }, []) 
+        setNewEmployee(response?.data?.data?.employee); // Set the employee details in state
+      } catch (error) {
+        console.error("Error fetching employee details:", error);
+      }
+    };
+
+    fetchEmployeeDetails();
+  }, [] );
+
   const handleSubmit = async (e) => {
+<<<<<<< HEAD
     e.preventDefault();if(isEdit){
       try{
       const accessToken = localStorage.getItem('accessToken');
@@ -84,6 +88,44 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
       getAllEmployees(); // This will refresh the employee list after creating a new employee
     } catch (error) {
       console.error("Error creating employee:", error);
+=======
+    e.preventDefault();
+    if (isEdit) {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        await axios.post(
+          "http://localhost:8020/api/superadmin/update-employee",
+          newEmployee,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        getAllEmployees(); // This will refresh the employee list after creating a new employee
+      } catch (error) {
+        console.error("Error creating employee:", error);
+      }
+    } else {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        await axios.post(
+          "http://localhost:8020/api/superadmin/create-employee",
+          newEmployee,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        getAllEmployees(); // This will refresh the employee list after creating a new employee
+      } catch (error) {
+        console.error("Error creating employee:", error);
+      }
+>>>>>>> 7cfab9c6523114f3f2145f455c70a69ee57ba798
     }
   };
 
@@ -92,7 +134,7 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
       {/* Input fields for employee details */}
       {/* Add input fields similar to the ones in CategoriesTable component */}
       <div>
-        <h2 className="HeadingForm"> New Employee Registration</h2>
+        <h2 className="HeadingForm"> {isEdit ? "Edit Employee" : "Create Employee"}</h2>
       </div>
       <div>
         <label>First Name:</label>
@@ -177,7 +219,7 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
 
       <div className="form-buttons">
         <button className="sub-button" type="submit">
-          <NavLink to="/employee">Submit</NavLink>
+          <NavLink to="/employee">{isEdit ? "Update" : "Submit"}</NavLink>
         </button>
         <button
           className="cancel-button"
@@ -191,5 +233,4 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
   );
 };
 
-}
 export default CreateEmployeeForm;
