@@ -26,7 +26,7 @@ const LeaveForm = ({ getAllLeaves }) => {
 
     try {
       const accessToken = localStorage.getItem("accessToken");
-      await axios.post(
+      const responce = await axios.post(
         "http://localhost:8020/api/superadmin/create-leave",
         newLeave,
         {
@@ -37,7 +37,9 @@ const LeaveForm = ({ getAllLeaves }) => {
         }
       );
 
-      getAllLeaves(); // This will refresh the leave list after creating a new leave
+      console.log('responce', responce);
+
+      getAllLeaves(); 
     } catch (error) {
       console.error("Error creating leave:", error);
     }
