@@ -4,6 +4,8 @@ import Sidebar from "./pages/auth/Sidebar";
 import Holiday from "./pages/auth/Holidays";
 import Employee from "./pages/auth/Employees";
 import Login from "./pages/auth/Login";
+import Read from  "./pages/auth/read";
+import Newholiday from "./pages/auth/Newholiday"
 
 // First, I want to show the login page, and after login, I want to show the sidebar.
 // I want sidebar to remain constant on every page.
@@ -32,6 +34,8 @@ function AuthenticatedRoutes() {
         {/* <Route path="/" element={<Dashboard />} /> */}
         <Route path="/holiday" element={<Holiday />} />
         <Route path="/employee" element={<Employee />} />
+        <Route path ="/holiday/newholiday" element={<Newholiday />}/>
+        <Route path="/read/:holidayId" element={<Read />} />
       </Routes>
     </>
   );

@@ -1,6 +1,7 @@
-import React from 'react';
-import './Sidebar.css';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import "./Sidebar.css";
+import { NavLink } from "react-router-dom";
+import logoutButton from "./logoutButton";
 
 const Sidebar = () => {
   const handleToggleSidebar = () => {
@@ -22,7 +23,7 @@ const Sidebar = () => {
         <div className="logo_content">
           <div className="logo">
             <header>
-              <img src={require('./ilomaLogo.webp')} alt="" />
+              <img src={require("./ilomaLogo.webp")} alt="" />
               <p>Iloma</p>
             </header>
           </div>
@@ -30,11 +31,36 @@ const Sidebar = () => {
         </div>
 
         <ul className="nav_list">
-          <li><NavLink to="/dashboard"><i className="bx bx-grid-alt"></i><span className="links_name">Dashboard</span></NavLink></li>
-          <li><NavLink to="/employee"><i className="bx bx-user"></i><span className="links_name">Employee</span></NavLink></li>
-          <li><NavLink to="/holiday"><i className="bx bx-chat"></i><span className="links_name">Holiday</span></NavLink></li>
-          <li><NavLink to="/leaves"><i className="bx bx-pie-chart-alt-2"></i><span className="links_name">Leaves</span></NavLink></li>
-          <li><NavLink to="/about"><i className="bx bx-folder"></i><span className="links_name">About</span></NavLink></li>
+          <li>
+            <NavLink to="/dashboard">
+              <i className="bx bx-grid-alt"></i>
+              <span className="links_name">Dashboard</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/employee">
+              <i className="bx bx-user"></i>
+              <span className="links_name">Employee</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/holiday">
+              <i className="bx bx-chat"></i>
+              <span className="links_name">Holiday</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/leaves">
+              <i className="bx bx-pie-chart-alt-2"></i>
+              <span className="links_name">Leaves</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/about">
+              <i className="bx bx-folder"></i>
+              <span className="links_name">About</span>
+            </NavLink>
+          </li>
         </ul>
       </div>
 
@@ -42,12 +68,19 @@ const Sidebar = () => {
         <div className="profile">
           <div className="links_name">
             <div className="social-links">
-              <a href="#"><i className="bx bxl-twitter"></i></a>
-              <a href="#"><i className="bx bxl-facebook"></i></a>
-              <a href="#"><i className="bx bxl-instagram"></i></a>
+              <a href="#">
+                <i className="bx bxl-twitter"></i>
+              </a>
+              <a href="#">
+                <i className="bx bxl-facebook"></i>
+              </a>
+              <a href="#">
+                <i className="bx bxl-instagram"></i>
+              </a>
             </div>
           </div>
-          <i className="bx bx-log-out" id="log_out"></i>
+          {/* // <i className="bx bx-log-out" id="log_out"></i> */}
+          <logoutButton />
         </div>
       </div>
     </div>
