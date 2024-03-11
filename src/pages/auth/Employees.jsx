@@ -105,7 +105,7 @@ const CategoriesTable = () => {
                 <td className="ac">Active</td>
                 <td>
                   < NavLink to ={`/employee/${employee.id}`} className="view-icon" style={{ color: 'black'}}><i className="fas fa-eye"></i></NavLink>
-                  <span className="edit-icon"><i className="fas fa-pen"></i></span>
+                  < NavLink to ={`/employee/edit/${employee.id}`} className="edit-icon" style={{ color: 'black'}}><i className="fas fa-pen"></i></NavLink>
                   <span className="delete-icon" onClick={() => handleDeleteConfirmation(employee)}><i className="fas fa-trash"></i></span>
                 </td>
               </tr>

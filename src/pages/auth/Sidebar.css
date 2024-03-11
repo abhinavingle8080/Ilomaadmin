@@ -196,3 +196,7 @@ width: 240px;
   left: 85%;
 
 }
+.logout-button:hover {
+  cursor: pointer; 
+  color: #36adf1;
+}

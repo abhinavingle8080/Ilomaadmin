@@ -1,6 +1,7 @@
 import React from "react";
 import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
+import Logout from "./Logout";
 
 const Sidebar = () => {
   const handleToggleSidebar = () => {
@@ -82,7 +83,8 @@ const Sidebar = () => {
                 </a>
               </div>
             </div>
-            <i className="bx bx-log-out" id="log_out"></i>
+            {/* <i className="bx bx-log-out" id="log_out"></i> */}
+            <Logout/>
           </div>
         </div>
       </div>
