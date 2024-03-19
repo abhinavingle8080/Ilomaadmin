@@ -6,6 +6,7 @@ import { NavLink, useParams, useLocation } from "react-router-dom";
 
 const CreateEmployeeForm = ({ getAllEmployees }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [birthdayPopup, setBirthdayPopup] = useState(false); // State to manage birthday popup
   const { pathname } = useLocation();
   const isEdit = pathname.includes(`edit`);
   const { id } = useParams();
@@ -27,7 +28,7 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
       [fieldName]: value,
     }));
   };
-  console.log("edit form", id);
+
   useEffect(() => {
     const fetchEmployeeDetails = async () => {
       try {
@@ -46,13 +47,20 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
         );
 
         setNewEmployee(response?.data?.data?.employee); // Set the employee details in state
+        
+        // Check if it's the employee's birthday
+        const today = new Date();
+        const employeeDob = new Date(response?.data?.data?.employee?.dob);
+        if (today.getMonth() === employeeDob.getMonth() && today.getDate() === employeeDob.getDate()) {
+          setBirthdayPopup(true);
+        }
       } catch (error) {
         console.error("Error fetching employee details:", error);
       }
     };
 
     fetchEmployeeDetails();
-  }, [] );
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,106 +103,114 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
   };
 
   return (
-    <form className="create-employee-form" onSubmit={handleSubmit}>
-      {/* Input fields for employee details */}
-      {/* Add input fields similar to the ones in CategoriesTable component */}
-      <div>
-        <h2 className="HeadingForm"> {isEdit ? "Edit Employee" : "Create Employee"}</h2>
-      </div>
-      <div>
-        <label>First Name:</label>
-        <input
-          type="text"
-          name="first_name"
-          value={newEmployee.first_name}
-          onChange={(e) => handleInputChange(e, "first_name")}
-          required
-        />
-      </div>
-      <div>
-        <label>Last Name:</label>
-        <input
-          type="text"
-          name="last_name"
-          value={newEmployee.last_name}
-          onChange={(e) => handleInputChange(e, "last_name")}
-          required
-        />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="text"
-          name="email"
-          value={newEmployee.email}
-          onChange={(e) => handleInputChange(e, "email")}
-          required
-        />
-      </div>
-      <div>
-        <label>Gender:</label>
-        <input
-          type="text"
-          name="gender"
-          value={newEmployee.gender}
-          onChange={(e) => handleInputChange(e, "gender")}
-          required
-        />
-      </div>
-      <div>
-        <label>DOB:</label>
-        <input
-          type="text"
-          name="dob"
-          value={newEmployee.dob}
-          onChange={(e) => handleInputChange(e, "dob")}
-          required
-        />
-      </div>
-      <div>
-        <label>phone_no:</label>
-        <input
-          type="text"
-          name="phone_no"
-          value={newEmployee.phone_no}
-          onChange={(e) => handleInputChange(e, "phone_no")}
-          required
-        />
-      </div>
-      <div>
-        <label>country_code:</label>
-        <input
-          type="text"
-          name="country_code"
-          value={newEmployee.country_code}
-          onChange={(e) => handleInputChange(e, "country_code")}
-          required
-        />
-      </div>
-      <div>
-        <label>address:</label>
-        <input
-          type="text"
-          name="address"
-          value={newEmployee.address}
-          onChange={(e) => handleInputChange(e, "address")}
-          required
-        />
-      </div>
+    <>
+      {birthdayPopup && (
+        <div className="birthday-popup">
+          {/* Your birthday popup content goes here */}
+          Today is {newEmployee.first_name}'s birthday!
+        </div>
+      )}
+      <form className="create-employee-form" onSubmit={handleSubmit}>
+        {/* Input fields for employee details */}
+        {/* Add input fields similar to the ones in CategoriesTable component */}
+        <div>
+          <h2 className="HeadingForm"> {isEdit ? "Edit Employee" : "Create Employee"}</h2>
+        </div>
+        <div>
+          <label>First Name:</label>
+          <input
+            type="text"
+            name="first_name"
+            value={newEmployee.first_name}
+            onChange={(e) => handleInputChange(e, "first_name")}
+            required
+          />
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input
+            type="text"
+            name="last_name"
+            value={newEmployee.last_name}
+            onChange={(e) => handleInputChange(e, "last_name")}
+            required
+          />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input
+            type="text"
+            name="email"
+            value={newEmployee.email}
+            onChange={(e) => handleInputChange(e, "email")}
+            required
+          />
+        </div>
+        <div>
+          <label>Gender:</label>
+          <input
+            type="text"
+            name="gender"
+            value={newEmployee.gender}
+            onChange={(e) => handleInputChange(e, "gender")}
+            required
+          />
+        </div>
+        <div>
+          <label>DOB:</label>
+          <input
+            type="text"
+            name="dob"
+            value={newEmployee.dob}
+            onChange={(e) => handleInputChange(e, "dob")}
+            required
+          />
+        </div>
+        <div>
+          <label>phone_no:</label>
+          <input
+            type="text"
+            name="phone_no"
+            value={newEmployee.phone_no}
+            onChange={(e) => handleInputChange(e, "phone_no")}
+            required
+          />
+        </div>
+        <div>
+          <label>country_code:</label>
+          <input
+            type="text"
+            name="country_code"
+            value={newEmployee.country_code}
+            onChange={(e) => handleInputChange(e, "country_code")}
+            required
+          />
+        </div>
+        <div>
+          <label>address:</label>
+          <input
+            type="text"
+            name="address"
+            value={newEmployee.address}
+            onChange={(e) => handleInputChange(e, "address")}
+            required
+          />
+        </div>
 
-      <div className="form-buttons">
-        <button className="sub-button" type="submit">
-          <NavLink to="/employee">{isEdit ? "Update" : "Submit"}</NavLink>
-        </button>
-        <button
-          className="cancel-button"
-          type="button"
-          onClick={() => setShowCreateForm(false)}
-        >
-          <NavLink to="/employee">Cancel</NavLink>
-        </button>
-      </div>
-    </form>
+        <div className="form-buttons">
+          <button className="sub-button" type="submit">
+            <NavLink to="/employee">{isEdit ? "Update" : "Submit"}</NavLink>
+          </button>
+          <button
+            className="cancel-button"
+            type="button"
+            onClick={() => setShowCreateForm(false)}
+          >
+            <NavLink to="/employee">Cancel</NavLink>
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

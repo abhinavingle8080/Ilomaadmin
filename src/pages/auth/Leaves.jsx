@@ -1,8 +1,9 @@
+// Import useState, useEffect, axios, NavLink
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
-import "./Employees.css";
-import "@fortawesome/fontawesome-free/css/all.css";// Create a Leave.css file for styling if needed
+import { NavLink } from "react-router-dom";
+import "./Leaves.css"; // Import your CSS file for styling if needed
+import "@fortawesome/fontawesome-free/css/all.css";
 
 const LeavePage = () => {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -10,39 +11,31 @@ const LeavePage = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [leaveToDelete, setLeaveToDelete] = useState(null);
 
-  const [newLeaveRequest, setNewLeaveRequest] = useState({
-    leave_id: '',
-    date: '',
-    day: '',
-    duration: '',
-    reason: ''
-  });
-
   useEffect(() => {
     getAllLeaveRequests();
   }, []);
 
   const getAllLeaveRequests = async () => {
     try {
-      const accessToken = localStorage.getItem('accessToken');
-      const response = await axios.post('http://localhost:8020/api/superadmin//get-all-leaves', {
-        page: 1,
-        limit: 10
-      }, 
-      {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.post(
+        "http://localhost:8020/api/superadmin/get-all-leaves",
+        {
+          page: 1,
+          limit: 10,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
       setLeaveRequests(response?.data?.data?.rows);
     } catch (error) {
-      console.error('Error fetching leave requests:', error);
+      console.error("Error fetching leave requests:", error);
     }
   };
-
- 
-  
 
   const handleDeleteConfirmation = (leaveRequest) => {
     setLeaveToDelete(leaveRequest);
@@ -51,34 +44,42 @@ const LeavePage = () => {
 
   const deleteLeaveRequest = async (leaveRequestId) => {
     try {
-      const accessToken = localStorage.getItem('accessToken');
-      await axios.post('http://localhost:8020/api/superadmin/delete-leave', {
-        leave_id: leaveRequestId,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.post(
+        "http://localhost:8020/api/superadmin/delete-leave",
+        {
+          leave_id: leaveRequestId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
       getAllLeaveRequests(); // Refresh leave request list
     } catch (error) {
-      console.error('Error deleting leave request:', error);
+      console.error("Error deleting leave request:", error);
     }
     setShowDeleteConfirmation(false); // Close delete confirmation modal
     setLeaveToDelete(null);
   };
 
   return (
-   <section>
+    <section>
       <div className="head">
         <h3>Leave Requests</h3>
         <h5> Leaves List</h5>
         <div>
-          <button className='createCategory' onClick={() => setShowCreateForm(true)}><NavLink to="/leaves/newleave"> + Create New Leave Request</NavLink></button>
+          <button
+            className="createCategory"
+            onClick={() => setShowCreateForm(true)}
+          >
+            <NavLink to="/leaves/newleave"> + Create New Leave Request</NavLink>
+          </button>
         </div>
       </div>
-      
-     
+
       <div className="table-data">
         <div className="search-bar">
           <input type="search" name="search" placeholder="Search ..." />
@@ -90,20 +91,39 @@ const LeavePage = () => {
               <th>Day</th>
               <th>Duration</th>
               <th>Reason</th>
+              <th>Status</th> {/* Add status column */}
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {leaveRequests?.map((leaveRequest, index) => (
-              <tr key={leaveRequest.leave_id}>
+              <tr key={leaveRequest.id}>
                 <td>{leaveRequest.date}</td>
                 <td>{leaveRequest.day}</td>
                 <td>{leaveRequest.duration}</td>
                 <td>{leaveRequest.reason}</td>
+                <td>{leaveRequest.status}</td> 
                 <td>
-                  <span className="view-icon" ><i className="fas fa-eye"></i></span>
-                  <span className="edit-icon" ><i className="fas fa-pen"></i></span>
-                  <span className="delete-icon" onClick={() => handleDeleteConfirmation(leaveRequest)}><i className="fas fa-trash"></i></span>
+                  <NavLink
+                    to={`/leaves/${leaveRequest.id}`}
+                    className="view-icon"
+                    style={{ color: "black" }}
+                  >
+                    <i className="fas fa-eye"></i>
+                  </NavLink>
+                  <NavLink
+                    to={`/leaves/edit/${leaveRequest.id}`}
+                    className="edit-icon"
+                    style={{ color: "black" }}
+                  >
+                    <i className="fas fa-pen"></i>
+                  </NavLink>
+                  <span
+                    className="delete-icon"
+                    onClick={() => handleDeleteConfirmation(leaveRequest)}
+                  >
+                    <i className="fas fa-trash"></i>
+                  </span>
                 </td>
               </tr>
             ))}
@@ -128,8 +148,12 @@ const LeavePage = () => {
           <div className="confirmation-box">
             <p>Are you sure you want to delete this leave request?</p>
             <div>
-              <button onClick={() => deleteLeaveRequest(leaveToDelete?.leave_id)}>Yes</button>
-              <button onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+              <button onClick={() => deleteLeaveRequest(leaveToDelete?.id)}>
+                Yes
+              </button>
+              <button onClick={() => setShowDeleteConfirmation(false)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -139,4 +163,3 @@ const LeavePage = () => {
 };
 
 export default LeavePage;
-
