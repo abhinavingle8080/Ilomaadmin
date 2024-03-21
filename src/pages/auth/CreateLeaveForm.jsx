@@ -93,7 +93,7 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
       <div>
         <label>Date:</label>
         <input
-          type="text"
+          type="date"
           name="date"
           value={newLeave.date}
           onChange={(e) => handleInputChange(e, "date")}
@@ -121,6 +121,20 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
         />
       </div>
       <div>
+        <label>Status:</label>
+        <select
+
+          name="status"
+          value={newLeave.status}
+          onChange={(e) => handleInputChange(e, "status")}
+          required >
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Cancel">Rejected</option>
+        </select>
+      </div>
+
+      <div>
         <label>Reason:</label>
         <input
           type="text"
@@ -129,15 +143,8 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
           onChange={(e) => handleInputChange(e, "reason")}
           required/>
       </div>
-      <div>
-        <label>Status:</label>
-        <input
-          type="text"
-          name="status"
-          value={newLeave.status}
-          onChange={(e) => handleInputChange(e, "status")}
-          required/>
-      </div>
+      
+      
 
       <div className="form-buttons">
         <button className="sub-button" type="submit" onClick={handleSubmit}>

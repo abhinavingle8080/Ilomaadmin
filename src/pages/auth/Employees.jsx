@@ -10,6 +10,7 @@ const CategoriesTable = () => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
+    const [showBirthdayPopup, setShowBirthdayPopup] = useState(false);
 
   const [newEmployee, setNewEmployee] = useState({
     first_name: '',
@@ -39,6 +40,14 @@ const CategoriesTable = () => {
         }
       });
       setEmployees(response?.data?.data?.rows);
+      const today = new Date().toISOString().slice(5, 10); // Get today's date (MM-DD)
+            const employeesWithBirthdayToday = response?.data?.data?.rows.filter(employee => {
+                const birthday = new Date(employee.dob).toISOString().slice(5, 10);
+                return birthday === today;
+            });
+            if (employeesWithBirthdayToday.length > 0) {
+              setShowBirthdayPopup(true);
+          }
     } catch (error) {
       console.error('Error fetching employees:', error);
     }
@@ -137,6 +146,16 @@ const CategoriesTable = () => {
           </div>
         </div>
       )}
+         {showBirthdayPopup && (
+                <div className="birthday-popup">
+                    <h3>Today is the birthday of:</h3>
+                    <ul>
+                        {employees.map(employee => (
+                            <li key={employee.id}>{employee.first_name} {employee.last_name}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
     </section>
   );
 };

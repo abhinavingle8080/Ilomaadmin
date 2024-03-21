@@ -83,7 +83,7 @@ const Sidebar = () => {
                 </a>
               </div>
             </div>
-            {/* <i className="bx bx-log-out" id="log_out"></i> */}
+            <i className="bx bx-log-out" id="log_out"></i>          
             <Logout/>
           </div>
         </div>

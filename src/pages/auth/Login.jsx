@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; // Import your CSS file for styling
 import Dashboard from './Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -9,6 +10,7 @@ import Dashboard from './Sidebar';
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -34,6 +36,7 @@ const Login = () => {
 
       localStorage.setItem('accessToken', response.data.token);
       setLoggedIn(true);
+      navigate('/dashboard');
       // You can redirect the user or perform any other action upon successful login
     } catch (error) {
       // Handle error
@@ -41,10 +44,6 @@ const Login = () => {
       setError('Invalid email or password. Please try again.');
     }
   };
-
-  if (loggedIn) {
-    return <Dashboard />;
-  }
 
   return (
     <div className="login-container">
