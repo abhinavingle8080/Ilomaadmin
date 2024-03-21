@@ -1,0 +1,32 @@
+/* Viewholiday.css */
+
+.view-holiday-container {
+    margin-top: 8%;
+    margin-left: 25%;
+    overflow-y: auto;
+}
+
+.view-holiday-details {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #ddd;
+}
+
+.view-holiday-details h3 {
+    color: rgb(54, 165, 56);
+    margin-bottom: 20px;
+}
+
+.view-holiday-details p {
+    margin-bottom: 10px;
+}
+
+.view-holiday-details strong {
+    font-weight: bold;
+}
+
+.view-holiday-details .loading {
+    color: #52565a;
+}

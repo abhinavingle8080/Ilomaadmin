@@ -1,90 +1,106 @@
-import React from "react";
-import "./Sidebar.css";
-import { NavLink } from "react-router-dom";
-import logoutButton from "./logoutButton";
+import React from 'react';
+import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
+import './Sidebar.css'; // Import your CSS file
+import { NavLink, useNavigate } from 'react-router-dom'; // Import NavLink and useNavigate
+import { useEffect } from 'react';
 
-const Sidebar = () => {
-  const handleToggleSidebar = () => {
-    const sidebar = document.querySelector(".sidebar");
-    const btn = document.querySelector("#btn");
+function AdminDashboard() {
+  const navigate = useNavigate();
 
-    sidebar.classList.toggle("active");
-
-    if (btn.classList.contains("bx-menu")) {
-      btn.classList.replace("bx-menu", "bx-menu-alt-right");
-    } else {
-      btn.classList.replace("bx-menu-alt-right", "bx-menu");
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
     }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    navigate("/login"); 
   };
 
   return (
-    <div className="sidebar">
-      <div className="all">
-        <div className="logo_content">
-          <div className="logo">
-            <header>
-              <img src={require("./ilomaLogo.webp")} alt="" />
-              <p>Iloma</p>
-            </header>
-          </div>
-          <i className="bx bx-menu" id="btn" onClick={handleToggleSidebar}></i>
+    <div>
+      <input type="checkbox" id="menu-toggle" />
+      <div className="sidebar">
+        <div className="side-header">
+          <h3>i<span>loma</span></h3>
         </div>
+        <div className="side-content">
+          <div className="profile">
+            <div className="profile-img bg-img" ></div>
+            <h4>Iloma portal</h4>
+          </div>
 
-        <ul className="nav_list">
-          <li>
-            <NavLink to="/dashboard">
-              <i className="bx bx-grid-alt"></i>
-              <span className="links_name">Dashboard</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/employee">
-              <i className="bx bx-user"></i>
-              <span className="links_name">Employee</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/holiday">
-              <i className="bx bx-chat"></i>
-              <span className="links_name">Holiday</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/leaves">
-              <i className="bx bx-pie-chart-alt-2"></i>
-              <span className="links_name">Leaves</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/about">
-              <i className="bx bx-folder"></i>
-              <span className="links_name">About</span>
-            </NavLink>
-          </li>
-        </ul>
+          <div className="side-menu">
+            <ul>
+              <li>
+                <NavLink to="/dashboard" activeClassName="active">
+                  <span className="las la-home"></span>
+                  <small>Dashboard</small>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/employee" activeClassName="active">
+                  <span className="las la-user-alt"></span>
+                  <small>Employee</small>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/holiday" activeClassName="active">
+                  <span className="las la-clipboard-list"></span>
+                  <small>Holiday</small>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/leaves" activeClassName="active">
+                  <span className="las la-redo"></span>
+                  <small>Leaves</small>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" activeClassName="active">
+                  <span className="las la-tasks"></span>
+                  <small>About</small>
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <div className="profile_content">
-        <div className="profile">
-          <div className="links_name">
-            <div className="social-links">
-              <a href="#">
-                <i className="bx bxl-twitter"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-facebook"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-instagram"></i>
-              </a>
+      <div className="main-content">
+        <header>
+          <div className="header-content">
+            <label htmlFor="menu-toggle">
+              <span className="las la-bars"></span>
+            </label>
+
+            <div className="header-menu">
+              <label htmlFor="">
+                <span className="las la-search"></span>
+              </label>
+
+              <div className="notify-icon">
+                <span className="las la-envelope"></span>
+                <span className="notify">4</span>
+              </div>
+
+              <div className="notify-icon">
+                <span className="las la-bell"></span>
+                <span className="notify">3</span>
+              </div>
+
+              <div className="user">
+                <div className="bg-img" style={{backgroundImage: "url(img/1.jpeg)"}}></div>
+                <span className="las la-power-off" onClick={handleLogout}></span>
+                <span className='logout' onClick={handleLogout}>Logout</span>
+              </div>
             </div>
           </div>
-          {/* // <i className="bx bx-log-out" id="log_out"></i> */}
-          <logoutButton />
-        </div>
+        </header>
       </div>
     </div>
   );
-};
+}
 
-export default Sidebar;
+export default AdminDashboard;

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; // Import your CSS file for styling
 import Dashboard from './Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loggedIn, setLoggedIn] = useState(''); // Track login state
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -26,8 +28,11 @@ const Login = () => {
       });
 
       // Handle success
-      console.log('Login successful', response.data);
+      // console.log('Login successful', response.data);
+      localStorage.setItem('accessToken', response.data.token); 
+      // localStorage.setItem('userType', response.data.userType);
       setLoggedIn(true);
+      navigate('/dashboard');
       // You can redirect the user or perform any other action upon successful login
     } catch (error) {
       // Handle error

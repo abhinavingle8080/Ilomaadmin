@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Holidays.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 
@@ -12,6 +12,7 @@ const CategoriesTable = () => {
   const [selectedHoliday, setSelectedHoliday] = useState(null);
 
   const [newHoliday, setNewHoliday] = useState({
+    id:"",
     name: "",
     date: "",
     description: "",
@@ -68,7 +69,7 @@ const CategoriesTable = () => {
         },
         {
           headers: {
-            "Authorization": `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
         }
@@ -89,18 +90,18 @@ const CategoriesTable = () => {
     <section>
       <div className="head">
         <h3>Holidays</h3>
+        {/* <link to="/holiday">Create Holiday</link> */}
         <h5> Holidays List</h5>
         <div>
           <button
             className="createCategory"
             onClick={() => setShowCreateForm(true)}
           >
-           <NavLink to="/holiday/newholiday"> + Create New Employee</NavLink>
+            <NavLink to="/holiday/newholiday"> + Create New Holiday</NavLink>
           </button>
         </div>
       </div>
-     
-     
+
       <div className="table-data">
         <div className="search-bar">
           <input type="search" name="search" placeholder="Search ..." />
@@ -123,15 +124,20 @@ const CategoriesTable = () => {
                 <td>{holiday.date}</td>
                 <td>{holiday.description}</td>
                 <td>
-                  <NavLink to={`/read/${holiday.id}`}
+                  <NavLink
+                    to={`/read/${holiday.id}`}
                     className="view-icon"
-                    style={{color:"black"}}
+                    style={{ color: "black" }}
                   >
                     <i className="fas fa-eye"></i>
                   </NavLink>
-                  <span className="edit-icon">
+                  <NavLink
+                    to={`/holiday/edit/${holiday.id}`}
+                    className="edit-icon"
+                    style={{ color: "black" }}
+                  >
                     <i className="fas fa-pen"></i>
-                  </span>
+                  </NavLink>
                   <span
                     className="delete-icon"
                     onClick={() => handleDeleteConfirmation(holiday)}

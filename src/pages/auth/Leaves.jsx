@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Employees.css";
-import "@fortawesome/fontawesome-free/css/all.css";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./Leaves.css";
+import "@fortawesome/fontawesome-free/css/all.css"; // Create a Leave.css file for styling if needed
 
-const CategoriesTable = () => {
-  const [employees, setEmployees] = useState([]);
+const LeavePage = () => {
+  const [leaveRequests, setLeaveRequests] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [employeeToDelete, setEmployeeToDelete] = useState(null);
+  const [leaveToDelete, setLeaveToDelete] = useState(null);
 
-  const [newEmployee, setNewEmployee] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    gender: "",
-    dob: "",
-    phone_no: "",
-    country_code: "",
-    address: "",
+  const [newLeaveRequest, setNewLeaveRequest] = useState({
+    leave_id: "",
+    date: "",
+    day: "",
+    duration: "",
+    reason: "",
   });
 
   useEffect(() => {
-    getAllEmployees();
+    getAllLeaveRequests();
   }, []);
 
-  const getAllEmployees = async () => {
+  const getAllLeaveRequests = async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.post(
-        "http://localhost:3000/api/superadmin/get-employees",
+        "http://localhost:3000/api/superadmin//get-all-leaves",
         {
           page: 1,
           limit: 10,
@@ -41,24 +38,25 @@ const CategoriesTable = () => {
           },
         }
       );
-      setEmployees(response?.data?.data?.rows);
+      setLeaveRequests(response?.data?.data?.rows);
     } catch (error) {
-      console.error("Error fetching employees:", error);
+      console.error("Error fetching leave requests:", error);
     }
   };
 
-  const handleDeleteConfirmation = (employee) => {
-    setEmployeeToDelete(employee);
+  const handleDeleteConfirmation = (leaveRequest) => {
+    setLeaveToDelete(leaveRequest);
     setShowDeleteConfirmation(true);
   };
 
-  const deleteEmployee = async (employeeId) => {
+  const deleteLeaveRequest = async (leaveRequestId) => {
     try {
       const accessToken = localStorage.getItem("accessToken");
+
       const response = await axios.post(
-        "http://localhost:3000/api/superadmin/delete-employee",
+        "http://localhost:3000/api/superadmin/delete-leave",
         {
-          employee_id: employeeId,
+          leave_id: leaveRequestId,
         },
         {
           headers: {
@@ -67,30 +65,25 @@ const CategoriesTable = () => {
           },
         }
       );
-      getAllEmployees(); // Refresh employee list
+      getAllLeaveRequests(); // Refresh leave request list
     } catch (error) {
-      console.error("Error deleting employee:", error);
+      console.error("Error deleting leave request:", error);
     }
     setShowDeleteConfirmation(false); // Close delete confirmation modal
-    setEmployeeToDelete(null);
+    setLeaveToDelete(null);
   };
 
   return (
     <section>
       <div className="head">
-        <h3>Employees</h3>
-        <div className="navigation" style={{color:"black"}}>
-          <Link to="/dashboard">Dashboard/</Link>
-          <Link to="/employee">Employees</Link>
-          {/* <link to="/employee/employeeid">viewemployee</link> */}
-        </div>
-        <h5> Employees List</h5>
+        <h3>Leave Requests</h3>
+        <h5> Leaves List</h5>
         <div>
           <button
             className="createCategory"
             onClick={() => setShowCreateForm(true)}
           >
-            <NavLink to="/employee/newemployee"> + Create New Employee</NavLink>
+            <NavLink to="/leaves/newleave"> + Create New Leave Request</NavLink>
           </button>
         </div>
       </div>
@@ -102,32 +95,30 @@ const CategoriesTable = () => {
         <table>
           <thead>
             <tr>
-              <th>Sr No.</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Status</th>
+              <th>Date</th>
+              <th>Day</th>
+              <th>Duration</th>
+              <th>Reason</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {employees?.map((employee, index) => (
-              <tr key={employee.id}>
-                <td>{index + 1}</td>
-                <td>
-                  {employee.first_name} {employee.last_name}
-                </td>
-                <td>{employee.email}</td>
-                <td className="ac" style={{color:"green", fontWeight:"bold"}}>Active</td>
+            {leaveRequests?.map((leaveRequest, index) => (
+              <tr key={leaveRequest.id}>
+                <td>{leaveRequest.date}</td>
+                <td>{leaveRequest.day}</td>
+                <td>{leaveRequest.duration}</td>
+                <td>{leaveRequest.reason}</td>
                 <td>
                   <NavLink
-                    to={`/employee/${employee.id}`}
+                    to={`/leaves/${leaveRequest.id}`}
                     className="view-icon"
                     style={{ color: "black" }}
                   >
                     <i className="fas fa-eye"></i>
                   </NavLink>
                   <NavLink
-                    to={`/employee/edit/${employee.id}`}
+                    to={`/leaves/edit/${leaveRequest.id}`}
                     className="edit-icon"
                     style={{ color: "black" }}
                   >
@@ -135,7 +126,7 @@ const CategoriesTable = () => {
                   </NavLink>
                   <span
                     className="delete-icon"
-                    onClick={() => handleDeleteConfirmation(employee)}
+                    onClick={() => handleDeleteConfirmation(leaveRequest)}
                   >
                     <i className="fas fa-trash"></i>
                   </span>
@@ -161,9 +152,11 @@ const CategoriesTable = () => {
       {showDeleteConfirmation && (
         <div className="delete-confirmation">
           <div className="confirmation-box">
-            <p>Are you sure you want to delete this employee?</p>
+            <p>Are you sure you want to delete this leave request?</p>
             <div>
-              <button onClick={() => deleteEmployee(employeeToDelete?.id)}>
+              <button
+                onClick={() => deleteLeaveRequest(leaveToDelete?.id)}
+              >
                 Yes
               </button>
               <button onClick={() => setShowDeleteConfirmation(false)}>
@@ -177,4 +170,4 @@ const CategoriesTable = () => {
   );
 };
 
-export default CategoriesTable;
+export default LeavePage;
