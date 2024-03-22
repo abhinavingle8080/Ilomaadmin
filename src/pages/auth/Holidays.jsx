@@ -3,6 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./Holidays.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+import { Breadcrumbs, Link } from "@mui/material";
 
 const CategoriesTable = () => {
   const [holidays, setHolidays] = useState([]); // Corrected variable name
@@ -44,13 +45,13 @@ const CategoriesTable = () => {
     }
   };
 
-  const handleInputChange = (e, fieldName) => {
-    const { value } = e.target;
-    setNewHoliday((prevHoliday) => ({
-      ...prevHoliday,
-      [fieldName]: value,
-    }));
-  };
+  // const handleInputChange = (e, fieldName) => {
+  //   const { value } = e.target;
+  //   setNewHoliday((prevHoliday) => ({
+  //     ...prevHoliday,
+  //     [fieldName]: value,
+  //   }));
+  // };
 
   //createh
 
@@ -82,15 +83,33 @@ const CategoriesTable = () => {
     setHolidayToDelete(null);
   };
 
-  const handleViewHoliday = (Holiday) => {
-    setSelectedHoliday(Holiday);
-  };
+  // const handleViewHoliday = (Holiday) => {
+  //   setSelectedHoliday(Holiday);
+  // };
 
   return (
     <section>
       <div className="head">
         <h3>Holidays</h3>
-        {/* <link to="/holiday">Create Holiday</link> */}
+
+        
+        <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href="/dashboard" style={{color:"black"}}>
+            Dashboard
+          </Link>
+          <Link underline="hover" color="inherit" href="/employee"  style={{ color: "black" }}>
+            Employee
+          </Link>
+          <Link
+          underline="none"
+            color="inherit"
+            // href="/holiday"
+          >
+            Holiday
+          </Link>
+        </Breadcrumbs>
+
+
         <h5> Holidays List</h5>
         <div>
           <button

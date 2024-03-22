@@ -15,7 +15,7 @@ function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
-    navigate("/login"); 
+    navigate("/login");
   };
 
   return (
@@ -72,7 +72,7 @@ function AdminDashboard() {
         <header>
           <div className="header-content">
             <label htmlFor="menu-toggle">
-              <span className="las la-bars"></span>
+              {/* <span className="las la-bars"></span> */}
             </label>
 
             <div className="header-menu">
@@ -92,8 +92,8 @@ function AdminDashboard() {
 
               <div className="user">
                 <div className="bg-img" style={{backgroundImage: "url(img/1.jpeg)"}}></div>
-                <span className="las la-power-off" onClick={handleLogout}></span>
-                <span className='logout' onClick={handleLogout}>Logout</span>
+                <span className="las la-power-off" onClick={handleLogout} style={{fontSize:"16px",backgroundColor:"lightgreen",color:"white",padding:"6px",marginLeft:"8px",paddingTop:"8px",borderTopLeftRadius:"8px",borderBottomLeftRadius:"8px"}}></span>
+                <span className='logout' onClick={handleLogout} style={{fontSize:"16px",backgroundColor:"lightgreen",color:"white",padding:"5px",marginLeft:"-3px",borderTopRightRadius:"8px",borderBottomRightRadius:"8px"}}>Logout</span>
               </div>
             </div>
           </div>

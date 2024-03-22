@@ -3,6 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./Leaves.css";
 import "@fortawesome/fontawesome-free/css/all.css"; // Create a Leave.css file for styling if needed
+import { Breadcrumbs, Link } from "@mui/material";
 
 const LeavePage = () => {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -77,6 +78,27 @@ const LeavePage = () => {
     <section>
       <div className="head">
         <h3>Leave Requests</h3>
+        
+        <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href="/dashboard" style={{color:"black"}}>
+            Dashboard
+          </Link>
+          <Link underline="hover" color="inherit" href="/employee"  style={{ color: "black" }}>
+            Employee
+          </Link>
+          <Link underline="hover" color="inherit" href="/holiday"  style={{ color: "black" }}>
+            Holiday
+          </Link>
+          <Link
+          underline="none"
+            color="inherit"
+            // href="/holiday"
+          >
+            Leaves
+          </Link>
+        </Breadcrumbs>
+
+
         <h5> Leaves List</h5>
         <div>
           <button

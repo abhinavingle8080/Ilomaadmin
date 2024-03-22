@@ -3,6 +3,8 @@ import axios from "axios";
 import "./Employees.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { Link, NavLink } from "react-router-dom";
+import { Breadcrumbs} from "@mui/material";
+
 
 const CategoriesTable = () => {
   const [employees, setEmployees] = useState([]);
@@ -79,11 +81,16 @@ const CategoriesTable = () => {
     <section>
       <div className="head">
         <h3>Employees</h3>
-        <div className="navigation" style={{color:"black"}}>
-          <Link to="/dashboard">Dashboard/</Link>
-          <Link to="/employee">Employees</Link>
-          {/* <link to="/employee/employeeid">viewemployee</link> */}
-        </div>
+
+        <Breadcrumbs maxItems={2} aria-label="breadcrumb" style={{color:"black"}} separator="/">
+          <Link underline="hover" color="inherit" href to="/dashboard" style={{color:"black"}}>
+            Dashboard
+          </Link>
+          <Link underline="hover" color="inherit" href to="/employee/newemployee" style={{color:"black"}}>
+            Employee
+          </Link>
+        </Breadcrumbs>
+
         <h5> Employees List</h5>
         <div>
           <button
@@ -117,7 +124,12 @@ const CategoriesTable = () => {
                   {employee.first_name} {employee.last_name}
                 </td>
                 <td>{employee.email}</td>
-                <td className="ac" style={{color:"green", fontWeight:"bold"}}>Active</td>
+                <td
+                  className="ac"
+                  style={{ color: "green", fontWeight: "bold" }}
+                >
+                  Active
+                </td>
                 <td>
                   <NavLink
                     to={`/employee/${employee.id}`}

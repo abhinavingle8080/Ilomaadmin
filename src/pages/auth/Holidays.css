@@ -1,3 +1,34 @@
+/* .page-header {
+  padding: 1.3rem 1rem;
+  background: #E9edf2;
+  border-bottom: 1px solid #dee2e8;
+}
+
+.page-header h1, .page-header small {
+  color: #74767d;
+}
+#menu-toggle:checked ~ .main-content {
+  margin-left: 60px;
+  width: calc(100% - 60px);
+}
+
+#menu-toggle:checked ~ .main-content header {
+  left: 0px;
+}
+.main-content {
+  top: 0px;
+  left: 0px;
+  margin-left: -1px;
+  width: calc(100% - 165px);
+  transition: margin-left 300ms;
+}
+@media only screen and (max-width: 720px) {
+  #menu-toggle:checked ~ .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+} */
+
 section{
   margin-top: 8%;
    margin-left: 25%;
