@@ -1,35 +1,32 @@
-/* LeaveDetails.css */
+/* Viewleave.css */
 
-.leave-details {
+.view-leave-container {
     margin-top: 8%;
     margin-left: 25%;
     overflow-y: auto;
-  }
-  
-  .main {
+}
+
+.view-leave-details {
     max-width: 600px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #ddd;
-  }
-  
-  .main-heading {
+}
+
+.view-leave-details h3 {
     color: rgb(54, 165, 56);
     margin-bottom: 20px;
-  }
-  
-  .view-p {
+}
+
+.view-leave-details p {
     margin-bottom: 10px;
-  }
-  
-  .description {
+}
+
+.view-leave-details strong {
     font-weight: bold;
-  }
-  
-  .loading {
+}
+
+.view-leave-details .loading {
     color: #52565a;
-  }
-  
-  /* End of LeaveDetails.css */
-  
+}

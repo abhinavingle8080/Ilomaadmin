@@ -102,7 +102,7 @@ const CategoriesTable = () => {
                 <td>{index + 1}</td>
                 <td>{employee.first_name} {employee.last_name}</td>
                 <td>{employee.email}</td>
-                <td className="ac">Active</td>
+                <td className="ac" style={{color:"green",fontWeight:"bold"}}>Active</td>
                 <td>
                   < NavLink to ={`/employee/${employee.id}`} className="view-icon" style={{ color: 'black'}}><i className="fas fa-eye"></i></NavLink>
                   < NavLink to ={`/employee/edit/${employee.id}`} className="edit-icon" style={{ color: 'black'}}><i className="fas fa-pen"></i></NavLink>

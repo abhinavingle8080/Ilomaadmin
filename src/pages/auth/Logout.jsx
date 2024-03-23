@@ -5,7 +5,7 @@ const LogoutButton = () => {
   const Navigate= useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem('accessToken');
     // Perform logout logic here
     // For example, clearing user session or token
     // Redirect user to the login page

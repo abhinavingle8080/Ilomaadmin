@@ -1,11 +1,10 @@
-// LeaveDetails.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Viewleave.css"; // Assuming you have a CSS file named ViewLeave.css
+import "./Viewleave.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { useParams } from "react-router-dom";
 
-const LeaveDetails = () => {
+const ViewLeave = () => {
   const { leaveId } = useParams(); // Get the leave ID from the URL params
   const [leave, setLeave] = useState(null);
 
@@ -15,9 +14,9 @@ const LeaveDetails = () => {
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.post(
-          "http://localhost:8020/api/superadmin/get-leave",
+          `http://localhost:8020/api/superadmin/get-leave`,
           {
-            leave_id: leaveId,
+            leave_id:leaveId,
           },
           {
             headers: {
@@ -34,36 +33,37 @@ const LeaveDetails = () => {
     };
 
     fetchLeaveDetails(); // Call the fetchLeaveDetails function
-  }, [leaveId]); // Make sure to include leaveId in the dependency array to re-fetch leave details when it changes
+  }, [leaveId]); // Make sure to include leaveId in the dependency array to re-fetch leave details when id changes
 
   return (
-    <section className="leave-details">
+    <section className="view-leave-container">
       {leave ? (
-        <div className="main">
-          <h3 className="main-heading">Leave Details</h3>
-          <div className="main">
-            <p className="view-p">
+        <div className="view-leave-details">
+          <h3>Leave Details</h3>
+          <div>
+            <p>
               <strong>ID:</strong> {leave.id}
             </p>
-            <p className="view-p">
+            <p>
               <strong>Date:</strong> {leave.date}
             </p>
-            <p className="view-p">
+            <p>
               <strong>Day:</strong> {leave.day}
             </p>
-            <p className="view-p">
+            <p>
               <strong>Duration:</strong> {leave.duration}
             </p>
-            <p className="description">
+           
+            <p>
               <strong>Reason:</strong> {leave.reason}
             </p>
           </div>
         </div>
       ) : (
-        <p className="view-p">Loading...</p>
+        <p className="loading">Loading...</p>
       )}
     </section>
   );
 };
 
-export default LeaveDetails;
+export default ViewLeave;
