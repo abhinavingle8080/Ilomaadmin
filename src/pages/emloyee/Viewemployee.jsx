@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Viewemployee.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const EmployeeDetails = () => {
   const { employeeId } = useParams(); // Get the employee ID from the URL params
@@ -71,7 +70,7 @@ const EmployeeDetails = () => {
           </div>
         </div>
       ) : (
-        <p className="loading">Loading...</p>
+        <p className="loading" style={{ textAlign: "center" ,fontweight:"bold"}}>Please wait employee data is Loading...</p>
       )}
     </section>
   );

@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { NavLink, useParams, useLocation, useNavigate } from "react-router-dom";
-import "./CreateLeaveForm.css";
+import { NavLink, useParams, useLocation } from "react-router-dom";
 
 const CreateLeaveForm = ({ getAllLeaves }) => {
-  const navigate = useNavigate();
   const [showCreateForm, setShowCreateForm] = useState(false);
   const { pathname } = useLocation();
   const isEdit = pathname.includes(`edit`);
   const { id } = useParams();
   const [newLeave, setNewLeave] = useState({
-    leave_id: '',
-    date: '',
-    day: '',
-    duration: '',
-    reason: '',
-    // status: 'pending' // Add status field and initialize it to 'pending'
+    leave_id: "",
+    date: "",
+    day: "",
+    duration: "",
+    reason: "",
+    status: "Pending", // Default status is Pending
   });
 
   const handleInputChange = (e, fieldName) => {
@@ -55,32 +53,18 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
     e.preventDefault();
     try {
       const accessToken = localStorage.getItem("accessToken");
-      if (isEdit) {
-        await axios.post(
-          "http://localhost:8020/api/superadmin/update-leave",
-          newLeave,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      } else {
-        await axios.post(
-          "http://localhost:8020/api/superadmin/create-leave",
-          newLeave,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      }
-      navigate('/leaves')// This will refresh the leave list after creating/updating a leave
+      const url = isEdit
+        ? "http://localhost:8020/api/superadmin/update-leave"
+        : "http://localhost:8020/api/superadmin/create-leave";
+      await axios.post(url, newLeave, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      getAllLeaves(); // This will refresh the leave list after creating/updating a leave
     } catch (error) {
-      console.error("Error creating/updating leave:", error);
+      console.error(`Error ${isEdit ? "updating" : "creating"} leave:`, error);
     }
   };
 
@@ -88,7 +72,9 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
     <form className="create-leave-form">
       {/* Input fields for leave details */}
       <div>
-        <h2 className="HeadingForm">{isEdit ? "Edit Leave" : "Create Leave"}</h2>
+        <h2 className="HeadingForm">
+          {isEdit ? "Edit Leave" : "Create Leave"}
+        </h2>
       </div>
       <div>
         <label>Date:</label>
@@ -121,31 +107,27 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
         />
       </div>
       <div>
-        <label>Status:</label>
-        <select
-
-          name="status"
-          value={newLeave.status}
-          onChange={(e) => handleInputChange(e, "status")}
-          required >
-          <option value="Pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Cancel">Rejected</option>
-        </select>
-      </div>
-
-      <div>
         <label>Reason:</label>
         <input
           type="text"
           name="reason"
           value={newLeave.reason}
           onChange={(e) => handleInputChange(e, "reason")}
-          required/>
+          required
+        />
       </div>
-      
-      
-
+      {/* Dropdown for Status */}
+      <div>
+        <label>Status:</label>
+        <select
+          value={newLeave.status}
+          onChange={(e) => handleInputChange(e, "status")}
+        >
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
       <div className="form-buttons">
         <button className="sub-button" type="submit" onClick={handleSubmit}>
           <NavLink to="/leaves">{isEdit ? "Update" : "Submit"}</NavLink>

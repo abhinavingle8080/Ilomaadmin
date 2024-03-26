@@ -1,7 +1,5 @@
-// EmployeeDetails.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Viewholiday.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { useParams } from "react-router-dom";
 
@@ -37,9 +35,9 @@ const HolidayDetails = () => {
   }, [holidayId]); // Make sure to include employee_id in the dependency array to re-fetch holiday details when id changes
 
   return (
-    <section className="holiday-details">
+    <section className="view-holiday-container">
       {holiday ? (
-        <div className="main">
+        <div className="view-holiday-details">
           <h3 className="main-heading">Holiday Details</h3>
           <div className="main">
             <p className="view-p">
@@ -57,7 +55,7 @@ const HolidayDetails = () => {
           </div>
         </div>
       ) : (
-        <p className="view-p">Loading...</p>
+        <p className="view-p" style={{ textAlign: "center" ,fontweight:"bold"}}>Please wait holiday data is Loading...</p>
       )}
     </section>
   );

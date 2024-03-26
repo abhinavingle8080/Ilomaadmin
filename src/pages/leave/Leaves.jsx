@@ -1,15 +1,22 @@
-// Import useState, useEffect, axios, NavLink
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import "./Leaves.css"; // Import your CSS file for styling if needed
-import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/css/all.css"; // Create a Leave.css file for styling if needed
 
 const LeavePage = () => {
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [leaveToDelete, setLeaveToDelete] = useState(null);
+
+  const [newLeaveRequest, setNewLeaveRequest] = useState({
+    leave_id: "",
+    date: "",
+    day: "",
+    duration: "",
+    reason: "",
+    status:""
+  });
 
   useEffect(() => {
     getAllLeaveRequests();
@@ -19,7 +26,7 @@ const LeavePage = () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.post(
-        "http://localhost:8020/api/superadmin/get-all-leaves",
+        "http://localhost:8020/api/superadmin//get-all-leaves",
         {
           page: 1,
           limit: 10,
@@ -45,6 +52,7 @@ const LeavePage = () => {
   const deleteLeaveRequest = async (leaveRequestId) => {
     try {
       const accessToken = localStorage.getItem("accessToken");
+
       const response = await axios.post(
         "http://localhost:8020/api/superadmin/delete-leave",
         {
@@ -91,7 +99,7 @@ const LeavePage = () => {
               <th>Day</th>
               <th>Duration</th>
               <th>Reason</th>
-              <th>Status</th> {/* Add status column */}
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -102,7 +110,8 @@ const LeavePage = () => {
                 <td>{leaveRequest.day}</td>
                 <td>{leaveRequest.duration}</td>
                 <td>{leaveRequest.reason}</td>
-                <td>{leaveRequest.status}</td> 
+                <td>{leaveRequest.status}</td>
+
                 <td>
                   <NavLink
                     to={`/leaves/${leaveRequest.id}`}
@@ -148,7 +157,9 @@ const LeavePage = () => {
           <div className="confirmation-box">
             <p>Are you sure you want to delete this leave request?</p>
             <div>
-              <button onClick={() => deleteLeaveRequest(leaveToDelete?.id)}>
+              <button
+                onClick={() => deleteLeaveRequest(leaveToDelete?.id)}
+              >
                 Yes
               </button>
               <button onClick={() => setShowDeleteConfirmation(false)}>

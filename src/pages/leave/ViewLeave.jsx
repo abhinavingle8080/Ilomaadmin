@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./ViewLeave.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { useParams } from "react-router-dom";
 
@@ -57,10 +56,13 @@ const ViewLeave = () => {
             <p>
               <strong>Reason:</strong> {leave.reason}
             </p>
+            <p>
+              <strong>Status:</strong> {leave.status}
+            </p>
           </div>
         </div>
       ) : (
-        <p className="loading">Loading...</p>
+        <p className="loading"style={{ textAlign: "center" ,fontweight:"bold"}}>Please wait leave data is Loading...</p>
       )}
     </section>
   );

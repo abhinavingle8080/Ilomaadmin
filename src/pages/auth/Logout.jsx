@@ -1,20 +1,20 @@
-import React from 'react';
-import { useNavigate} from 'react-router-dom';
+// import React from 'react';
+// import { useNavigate } from 'react-router-dom';
 
-const LogoutButton = () => {
-  const Navigate= useNavigate();
+// const LogoutButton = () => {
+//   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    // Perform logout logic here
-    // For example, clearing user session or token
-    // Redirect user to the login page
-    Navigate('/');
-  };
+//   const handleLogout = () => {
+//     localStorage.removeItem('Token');
+//     // Perform logout logic here
+//     // For example, clearing user session or token
+//     // Redirect user to the login page
+//     navigate('/');
+//   };
 
-  return (
-    <i  className="bx bx-log-out logout-button" id="log_out" onClick={handleLogout}></i>
-  );
-};
+//   return (
+//     <span className='logout' onClick={handleLogout}>Logout</span>
+//   );
+// };
 
-export default LogoutButton;
+// export default LogoutButton;
