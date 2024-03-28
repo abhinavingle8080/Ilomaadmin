@@ -57,6 +57,9 @@ const ViewLeave = () => {
             <p>
               <strong>Reason:</strong> {leave.reason}
             </p>
+            <p>
+              <strong>Status:</strong> {leave.status}
+            </p>
           </div>
         </div>
       ) : (

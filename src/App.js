@@ -1,22 +1,22 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Sidebar from "./pages/auth/Sidebar";
+import Sidebar from "./pages/auth/Sidebar/Sidebar";
 
 // Import spinner component
-import Spinner from "./pages/auth/Spinner";
+import Spinner from "./pages/auth/Spinner/Spinner";
 
 // Lazy loaded components
-const Login = lazy(() => import("./pages/auth/Login"));
-const Holiday = lazy(() => import("./pages/auth/Holidays"));
-const Employee = lazy(() => import("./pages/auth/Employees"));
-const Leave = lazy(() => import("./pages/auth/Leaves"));
-const CreateEmployeeForm = lazy(() => import("./pages/auth/CreateEmployeeForm"));
-const Viewemployee = lazy(() => import("./pages/auth/Viewemployee"));
-const Newholiday = lazy(() => import("./pages/auth/Newholiday"));
-const Viewholiday = lazy(() => import("./pages/auth/viewholiday"));
-const ViewLeave = lazy(() => import("./pages/auth/ViewLeave"));
-const CreateLeaveForm = lazy(() => import("./pages/auth/CreateLeaveForm"));
-const Dashboard = lazy(() => import("./pages/auth/Dashboard"));
+const Login = lazy(() => import("./pages/auth/Login/Login"));
+const Holiday = lazy(() => import("./pages/auth/Holidays/Holidays"));
+const Employee = lazy(() => import("./pages/auth/Employees/Employees"));
+const Leave = lazy(() => import("./pages/auth/Leaves/Leaves"));
+const CreateEmployeeForm = lazy(() => import("./pages/auth/Employees/CreateEmployeeForm"));
+const Viewemployee = lazy(() => import("./pages/auth/Employees/Viewemployee"));
+const Newholiday = lazy(() => import("./pages/auth/Holidays/Newholiday"));
+const Viewholiday = lazy(() => import("./pages/auth/Holidays/viewholiday"));
+const ViewLeave = lazy(() => import("./pages/auth/Leaves/ViewLeave"));
+const CreateLeaveForm = lazy(() => import("./pages/auth/Leaves/CreateLeaveForm"));
+const Dashboard = lazy(() => import("./pages/auth/Dashboard/Dashboard"));
 
 function App() {
   return (

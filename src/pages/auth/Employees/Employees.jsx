@@ -3,29 +3,22 @@ import axios from "axios";
 import "./Employees.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { Link, NavLink } from "react-router-dom";
-import { Breadcrumbs} from "@mui/material";
-
+import { Breadcrumbs,TextField} from "@mui/material";
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, FormControl, InputLabel, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const CategoriesTable = () => {
   const [employees, setEmployees] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
-
-  const [newEmployee, setNewEmployee] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    gender: "",
-    dob: "",
-    phone_no: "",
-    country_code: "",
-    address: "",
-  });
+  const [currentPage, setCurrentPage] = useState(1); // State to keep track of current page
 
   useEffect(() => {
     getAllEmployees();
-  }, []);
+  }, [currentPage]); // Fetch data whenever currentPage changes
 
   const getAllEmployees = async () => {
     try {
@@ -33,8 +26,8 @@ const CategoriesTable = () => {
       const response = await axios.post(
         "http://localhost:3000/api/superadmin/get-employees",
         {
-          page: 1,
-          limit: 10,
+          page: currentPage,
+          limit: 5,
         },
         {
           headers: {
@@ -47,6 +40,14 @@ const CategoriesTable = () => {
     } catch (error) {
       console.error("Error fetching employees:", error);
     }
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
   };
 
   const handleDeleteConfirmation = (employee) => {
@@ -82,16 +83,29 @@ const CategoriesTable = () => {
       <div className="head">
         <h3>Employees</h3>
 
-        <Breadcrumbs maxItems={2} aria-label="breadcrumb" style={{color:"black"}} separator="/">
+        <Breadcrumbs maxItems={3} aria-label="breadcrumb" style={{color:"black"}} separator="/">
           <Link underline="hover" color="inherit" href to="/dashboard" style={{color:"black"}}>
             Dashboard
           </Link>
-          <Link underline="hover" color="inherit" href to="/employee/newemployee" style={{color:"black"}}>
+          <Link
+          underline="none"
+            color="inherit"
+            style={{ color: "grey" }}
+            // href="/holiday"
+          >
             Employee
+          </Link>
+          <Link
+          underline="none"
+            color="inherit"
+            style={{ color: "grey" }}
+            // href="/holiday"
+          >
+            Employee list
           </Link>
         </Breadcrumbs>
 
-        <h5> Employees List</h5>
+        {/* <h5> Employees List</h5> */}
         <div>
           <button
             className="createCategory"
@@ -103,8 +117,8 @@ const CategoriesTable = () => {
       </div>
 
       <div className="table-data">
-        <div className="search-bar">
-          <input type="search" name="search" placeholder="Search ..." />
+      <div className="search-bar">
+          <TextField type="search" label="Search" variant="outlined" />
         </div>
         <table>
           <thead>
@@ -124,12 +138,7 @@ const CategoriesTable = () => {
                   {employee.first_name} {employee.last_name}
                 </td>
                 <td>{employee.email}</td>
-                <td
-                  className="ac"
-                  style={{ color: "green", fontWeight: "bold" }}
-                >
-                  Active
-                </td>
+                <td className="ac" style={{color:"green", fontWeight:"bold"}}>Active</td>
                 <td>
                   <NavLink
                     to={`/employee/${employee.id}`}
@@ -159,13 +168,13 @@ const CategoriesTable = () => {
         <div className="footer">
           <h4>Row per page :</h4>
           <select className="page">
+            <option>5</option>
             <option>10</option>
-            <option>20</option>
           </select>
 
           <span>
-            <i className="fas fa-angle-left"></i>
-            <i className="fas fa-angle-right"></i>
+            <i className="fas fa-angle-left navigate-arrow" onClick={handlePrevPage} style={{marginRight:"10px"}}></i>
+            <i className="fas fa-angle-right navigate-arrow" onClick={handleNextPage}></i>
           </span>
         </div>
       </div>

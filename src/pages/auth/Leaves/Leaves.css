@@ -159,7 +159,7 @@ th {
         margin-left: 20%;
     }
 }
-/* Employees.css */
+/* leaves.css */
 
 .delete-confirmation {
     position: fixed;
@@ -202,7 +202,7 @@ th {
     background-color: #52565a; /* Grey color for cancel button */
     color: #fff;
   }
-  /* Employees.css */
+  /* leaves.css */
 
 
  
@@ -247,7 +247,7 @@ th {
     padding: 10px;
   }
 }
-.create-employee-form {
+.create-leave-form {
   margin: 100px auto; /* Center the form horizontally */
   max-width: 600px; /* Set maximum width for better readability */
   padding: 20px; /* Add some padding for spacing */
@@ -256,12 +256,12 @@ th {
   box-shadow: 0px 0px 10px #ddd; /* Add box shadow for depth */
 }
 
-.create-employee-form label {
+.create-leave-form label {
   display: block; /* Display labels as block elements */
   margin-bottom: 10px; /* Add margin bottom for spacing */
 }
 
-.create-employee-form input {
+.create-leave-form input {
   width: calc(100% - 20px); /* Adjust input width to fill the form minus padding */
   padding: 10px; /* Add padding for input fields */
   margin-bottom: 15px; /* Add margin bottom for spacing */
@@ -270,11 +270,11 @@ th {
   box-sizing: border-box; /* Include padding and border in the width */
 }
 
-.create-employee-form .form-buttons {
+.create-leave-form .form-buttons {
   text-align: center; /* Center align form buttons */
 }
 
-.create-employee-form button {
+.create-leave-form button {
   padding: 10px 20px; /* Add padding for buttons */
   margin: 5px 5px; /* Add margin for spacing between buttons */
   border: none; /* Remove default button border */
@@ -285,14 +285,14 @@ th {
   align-items: center;/* Remove default outline on focus */
 }
 
-.create-employee-form button[type="submit"] {
+.create-leave-form button[type="submit"] {
   background-color: rgb(54, 165, 56); /* Set background color for submit button */
   color: #fff; /* Set text color for submit button */
   width:70%;
   margin-left: 35px;
 }
 
-.create-employee-form button[type="button"] {
+.create-leave-form button[type="button"] {
   background-color: #52565a; /* Set background color for cancel button */
   color: #fff;
   width:70%;

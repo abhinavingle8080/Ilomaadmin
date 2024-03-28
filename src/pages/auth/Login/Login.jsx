@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; // Import your CSS file for styling
-import Dashboard from './Sidebar';
+import Dashboard from '../Sidebar/Sidebar';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +11,12 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loggedIn, setLoggedIn] = useState(''); // Track login state
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +54,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="card">
+      <div className="login-card">
       <h2 className="custom-heading">iLoma portal</h2>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleFormSubmit}>

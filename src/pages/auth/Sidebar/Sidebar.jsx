@@ -3,6 +3,8 @@ import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
 import './Sidebar.css'; // Import your CSS file
 import { NavLink, useNavigate } from 'react-router-dom'; // Import NavLink and useNavigate
 import { useEffect } from 'react';
+import Dashboard from '../Dashboard/Dashboard';
+
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -72,7 +74,7 @@ function AdminDashboard() {
         <header>
           <div className="header-content">
             <label htmlFor="menu-toggle">
-              {/* <span className="las la-bars"></span> */}
+              <span className="las la-bars"></span>
             </label>
 
             <div className="header-menu">
@@ -92,12 +94,13 @@ function AdminDashboard() {
 
               <div className="user">
                 <div className="bg-img" style={{backgroundImage: "url(img/1.jpeg)"}}></div>
-                <span className="las la-power-off" onClick={handleLogout} style={{fontSize:"16px",backgroundColor:"lightgreen",color:"white",padding:"6px",marginLeft:"8px",paddingTop:"8px",borderTopLeftRadius:"8px",borderBottomLeftRadius:"8px"}}></span>
+                <span className="las la-power-off" onClick={handleLogout} style={{fontSize:"16px",backgroundColor:"lightgreen",color:"white",padding:"6px",marginLeft:"8px",paddingTop:"6px",borderTopLeftRadius:"8px",borderBottomLeftRadius:"8px"}}></span>
                 <span className='logout' onClick={handleLogout} style={{fontSize:"16px",backgroundColor:"lightgreen",color:"white",padding:"5px",marginLeft:"-3px",borderTopRightRadius:"8px",borderBottomRightRadius:"8px"}}>Logout</span>
               </div>
             </div>
           </div>
         </header>
+
       </div>
     </div>
   );

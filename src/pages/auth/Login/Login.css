@@ -7,14 +7,22 @@
     height: 100vh;
   }
   
-  .card {
-    width: 300px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    background-color: hsl(115, 29%, 92%);
-  }
-  
+  .login-card{
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: hsl(115, 29%, 92%);
+}
+.login-card:hover {
+  box-shadow: 8px 9px 8px -5px rgb(0 0 0 / 50%);
+    background: #fff;
+    padding: 1rem;
+    border-radius: 3px;
+    border: 1px solid #b0b0b0;
+    cursor: pointer;
+}
+
   .card h2 {
     margin-bottom: 20px;
   }

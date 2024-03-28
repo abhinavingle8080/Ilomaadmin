@@ -3,8 +3,10 @@ import axios from "axios";
 import "./Employees.css"; // Assuming you have a CSS file for styling employees
 import { NavLink, useParams, useLocation } from "react-router-dom";
 import { Breadcrumbs, Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const CreateEmployeeForm = ({ getAllEmployees }) => {
+  const navigate = useNavigate();
   const [showCreateForm, setShowCreateForm] = useState(false);
   const { pathname } = useLocation();
   const isEdit = pathname.includes(`edit`);
@@ -53,6 +55,7 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
       };
 
       fetchEmployeeDetails();
+      
     }
   }, [isEdit, id]);
 
@@ -84,7 +87,8 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
           }
         );
       }
-      getAllEmployees(); // This will refresh the employee list after creating/editing an employee
+      // navigate("/employee");
+      getAllEmployees();    // This will refresh the employee list after creating/editing an employee
     } catch (error) {
       console.error(
         `Error ${isEdit ? "updating" : "creating"} employee:`,
@@ -158,17 +162,23 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
                 required
               />
             </div>
-            <div>
-              <label>Gender:</label>
-              <input
-                type="text"
-                name="gender"
-                value={newEmployee.gender}
-                onChange={(e) => handleInputChange(e, "gender")}
-                required
-              />
-            </div>
-            <div>
+            <div >
+                <label for="gender">Gender:</label>
+                <select
+                  name="gender"
+                  value={newEmployee.gender}
+                  onChange={(e) => handleInputChange(e, "gender")}
+                  style={{ width: "100%", height: "40px", fontSize: "16px" , marginBottom:"16px"}}
+                  required
+                >
+                  <option value="">Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
               <label>Date of Birth:</label>
               <input
                 type="date"
@@ -220,6 +230,7 @@ const CreateEmployeeForm = ({ getAllEmployees }) => {
                 className="cancel-button"
                 type="button"
                 onClick={() => setShowCreateForm(false)}
+                
               >
                 <NavLink to="/employee">Cancel</NavLink>
               </button>

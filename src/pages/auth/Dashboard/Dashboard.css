@@ -5,12 +5,9 @@
     --color-dark: #34425A;
     --text-grey: #B0B0B0;
 }
-
-.logout:hover{
-    cursor: pointer;
-    /* color: red; */
-    font-weight: bold;
-}
+/* small{
+    margin-top: 10px;
+} */
 
 * {
     margin: 0;
@@ -84,10 +81,7 @@
 }
 
 .bg-img {
-  background-image: url(./ilomaLogo.webp);
     background-repeat: no-repeat;
-    /* background-size: cover; */
-    background-position:left;
     background-size: cover;
     border-radius: 50%;
     background-size: cover;
@@ -111,9 +105,9 @@
     font-weight: 600;
 }
 
-.sidebar {
+/* .sidebar {
     /*overflow-y: auto;*/
-}
+/* } */ */
 
 .side-menu ul {
     text-align: center;
@@ -286,6 +280,21 @@ main {
     background: #fff;
     padding: 1rem;
     border-radius: 3px;
+    height: 130px;
+}
+.card:hover{
+    box-shadow: 8px 9px 8px -5px rgb(0 0 0 / 50%);
+    background: #fff;
+    padding: 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.card-birthday{
+    box-shadow: 5px 8px 8px -5px rgb(0 0 0 / 50%);
+    background: #fff;
+    padding: 1rem;
+    border-radius: 3px;
 }
 
 .card-head {
@@ -311,14 +320,17 @@ main {
     font-weight: 600;
 }
 
-.card-indicator {
+/* .card-indicator {
     margin: .7rem 0rem;
-    height: 10px;
-    border-radius: 4px;
-    background: #e9edf2;
-    overflow: hidden;
-}
+    /* height: 10px; */
+    /* height: 28px;
+    border-radius: 8px; */
+    /* background: #57966f; */
+    /* overflow: hidden; */
+/* } */
+ */
 
+/* 
 .indicator {
     height: 10px;
     border-radius: 4px;
@@ -329,7 +341,7 @@ main {
 }
 
 .indicator.two {
-    background: #2e654b;
+    background: #11a8c3;
 }
 
 .indicator.three {
@@ -338,10 +350,7 @@ main {
 
 .indicator.four {
     background: #f25656;
-}
-.indicator.five {
-    background: #592e2e;
-}
+} */
 
 .records {
     box-shadow: 0px 5px 5px -5px rgb(0 0 0 / 10%);

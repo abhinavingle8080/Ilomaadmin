@@ -3,13 +3,15 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./Leaves.css";
 import "@fortawesome/fontawesome-free/css/all.css"; // Create a Leave.css file for styling if needed
-import { Breadcrumbs, Link } from "@mui/material";
+import { Breadcrumbs, Link ,TextField } from "@mui/material";
 
 const LeavePage = () => {
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [leaveToDelete, setLeaveToDelete] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   const [newLeaveRequest, setNewLeaveRequest] = useState({
     leave_id: "",
@@ -17,19 +19,20 @@ const LeavePage = () => {
     day: "",
     duration: "",
     reason: "",
+    status: "",
   });
 
   useEffect(() => {
     getAllLeaveRequests();
-  }, []);
+  }, [currentPage]);
 
   const getAllLeaveRequests = async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.post(
-        "http://localhost:3000/api/superadmin//get-all-leaves",
+        "http://localhost:3000/api/superadmin/get-all-leaves",
         {
-          page: 1,
+          page: currentPage,
           limit: 10,
         },
         {
@@ -44,6 +47,14 @@ const LeavePage = () => {
       console.error("Error fetching leave requests:", error);
     }
   };
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+  
 
   const handleDeleteConfirmation = (leaveRequest) => {
     setLeaveToDelete(leaveRequest);
@@ -80,15 +91,6 @@ const LeavePage = () => {
         <h3>Leave Requests</h3>
         
         <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/dashboard" style={{color:"black"}}>
-            Dashboard
-          </Link>
-          <Link underline="hover" color="inherit" href="/employee"  style={{ color: "black" }}>
-            Employee
-          </Link>
-          <Link underline="hover" color="inherit" href="/holiday"  style={{ color: "black" }}>
-            Holiday
-          </Link>
           <Link
           underline="none"
             color="inherit"
@@ -96,10 +98,17 @@ const LeavePage = () => {
           >
             Leaves
           </Link>
+          <Link
+          underline="none"
+            color="inherit"
+            // href="/holiday"
+          >
+            Leaves list
+          </Link>
         </Breadcrumbs>
 
 
-        <h5> Leaves List</h5>
+        {/* <h5> Leaves List</h5> */}
         <div>
           <button
             className="createCategory"
@@ -111,8 +120,8 @@ const LeavePage = () => {
       </div>
 
       <div className="table-data">
-        <div className="search-bar">
-          <input type="search" name="search" placeholder="Search ..." />
+      <div className="search-bar">
+          <TextField type="search" label="Search" variant="outlined" />
         </div>
         <table>
           <thead>
@@ -121,6 +130,7 @@ const LeavePage = () => {
               <th>Day</th>
               <th>Duration</th>
               <th>Reason</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -131,6 +141,7 @@ const LeavePage = () => {
                 <td>{leaveRequest.day}</td>
                 <td>{leaveRequest.duration}</td>
                 <td>{leaveRequest.reason}</td>
+                <td style={{color: leaveRequest.status === "Approved" ? "green" : leaveRequest.status === "Rejected" ? "red" : "black"  }}>{leaveRequest.status}</td>
                 <td>
                   <NavLink
                     to={`/leaves/${leaveRequest.id}`}
@@ -165,8 +176,8 @@ const LeavePage = () => {
           </select>
 
           <span>
-            <i className="fas fa-angle-left"></i>
-            <i className="fas fa-angle-right"></i>
+            <i className="fas fa-angle-left navigate-arrow" onClick={handlePrevPage} style={{marginRight:"7px"}}></i>
+            <i className="fas fa-angle-right navigate-arrow" onClick={handleNextPage}></i>
           </span>
         </div>
       </div>

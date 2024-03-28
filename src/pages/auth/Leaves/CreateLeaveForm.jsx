@@ -4,20 +4,19 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import { NavLink, useParams, useLocation } from "react-router-dom";
 import "./Leaves.css";
 
-
 const CreateLeaveForm = ({ getAllLeaves }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const { pathname } = useLocation();
   const isEdit = pathname.includes(`edit`);
   const { id } = useParams();
   const [newLeave, setNewLeave] = useState({
-    leave_id: '',
-    date: '',
-    day: '',
-    duration: '',
-    reason: ''
+    leave_id: "",
+    date: "",
+    day: "",
+    duration: "",
+    reason: "",
+    status: "",
   });
-
 
   const handleInputChange = (e, fieldName) => {
     const { value } = e.target;
@@ -29,8 +28,7 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
 
   useEffect(() => {
     const fetchLeaveDetails = async () => {
-     
-        // console.log(isEdit)
+      // console.log(isEdit)
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.post(
@@ -45,13 +43,12 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
             },
           }
         );
-        
+
         setNewLeave(response?.data?.data); // Set the leave details in state
       } catch (error) {
         console.error("Error fetching leave details:", error);
       }
-    
-  }
+    };
     fetchLeaveDetails();
   }, []);
 
@@ -96,11 +93,13 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
   };
 
   return (
-   
-    <form className="create-leave-form" >
+    <form className="create-leave-form">
       {/* Input fields for leave details */}
       <div>
-        <h2 className="HeadingForm"> {isEdit ? "Edit Leave" : "Create Leave"}</h2>
+        <h2 className="HeadingForm">
+          {" "}
+          {isEdit ? "Edit Leave" : "Create Leave"}
+        </h2>
       </div>
       <div>
         <label>Date:</label>
@@ -132,7 +131,7 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
           required
         />
       </div>
-     
+
       <div>
         <label>Reason:</label>
         <input
@@ -142,6 +141,27 @@ const CreateLeaveForm = ({ getAllLeaves }) => {
           onChange={(e) => handleInputChange(e, "reason")}
           required
         />
+      </div>
+
+      <div>
+        <label for="status">Status:</label>
+        <select
+          name="status"
+          value={newLeave.status}
+          onChange={(e) => handleInputChange(e, "status")}
+          style={{
+            width: "96%",
+            height: "40px",
+            fontSize: "16px",
+            marginBottom: "16px",
+          }}
+          required
+        >
+          <option value="">Select</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
       </div>
 
       <div className="form-buttons">

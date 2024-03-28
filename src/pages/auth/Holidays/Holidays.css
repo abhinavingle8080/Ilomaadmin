@@ -1,43 +1,14 @@
-/* .page-header {
-  padding: 1.3rem 1rem;
-  background: #E9edf2;
-  border-bottom: 1px solid #dee2e8;
-}
-
-.page-header h1, .page-header small {
-  color: #74767d;
-}
-#menu-toggle:checked ~ .main-content {
-  margin-left: 60px;
-  width: calc(100% - 60px);
-}
-
-#menu-toggle:checked ~ .main-content header {
-  left: 0px;
-}
-.main-content {
-  top: 0px;
-  left: 0px;
-  margin-left: -1px;
-  width: calc(100% - 165px);
-  transition: margin-left 300ms;
-}
-@media only screen and (max-width: 720px) {
-  #menu-toggle:checked ~ .main-content {
-    margin-left: 0;
-    width: 100%;
-  }
-} */
-
 section{
   margin-top: 8%;
    margin-left: 25%;
+   overflow-y: auto; 
 }
 body{
-  /* position: relative; */
+  position: relative;
   min-height: 100vh;
   width: 100%;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 .head{
   display: inline;
@@ -53,9 +24,17 @@ body{
   font-size: 12px;
   font-weight: bold;
   border-radius: 5px;
-  margin-left: 50%;
+  margin-left: 40%;
   padding: 10px 15px;
   width : 30%;
+}
+.table-data{
+  width: 70%;
+  margin-top: 10px;
+  padding: 15px 10px;
+  background-color: #faf7f7;
+  box-shadow:0px 0px 10px #ddd;
+  border-radius: 13px;
 }
 .search-bar{
   
@@ -80,10 +59,11 @@ body{
 }
 
 table {
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
   border: 2px solid rgb(236, 233, 233);
-  margin-top: 5px;
+  margin-top: 5px,
+  
 }
 
 th, td {
@@ -327,4 +307,3 @@ color:rgb(54, 165, 56) ;
 margin-bottom: 20px;
 border-color: #52565a;
 }
-

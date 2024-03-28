@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./Holidays.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { Breadcrumbs, Link } from "@mui/material";
+import { Breadcrumbs, Link ,TextField} from "@mui/material";
 
 const CategoriesTable = () => {
   const [holidays, setHolidays] = useState([]); // Corrected variable name
@@ -11,6 +11,7 @@ const CategoriesTable = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [holidayToDelete, setHolidayToDelete] = useState(null); // Corrected variable name
   const [selectedHoliday, setSelectedHoliday] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [newHoliday, setNewHoliday] = useState({
     id:"",
@@ -21,7 +22,7 @@ const CategoriesTable = () => {
 
   useEffect(() => {
     getAllHolidays();
-  }, []);
+  }, [currentPage]);
 
   const getAllHolidays = async () => {
     try {
@@ -29,7 +30,7 @@ const CategoriesTable = () => {
       const response = await axios.post(
         "http://localhost:3000/api/superadmin/get-all-Holidays",
         {
-          page: 1,
+          page: currentPage,
           limit: 10,
         },
         {
@@ -44,6 +45,14 @@ const CategoriesTable = () => {
       console.error("Error fetching Holidays:", error);
     }
   };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
 
   // const handleInputChange = (e, fieldName) => {
   //   const { value } = e.target;
@@ -83,6 +92,7 @@ const CategoriesTable = () => {
     setHolidayToDelete(null);
   };
 
+  
   // const handleViewHoliday = (Holiday) => {
   //   setSelectedHoliday(Holiday);
   // };
@@ -94,12 +104,6 @@ const CategoriesTable = () => {
 
         
         <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/dashboard" style={{color:"black"}}>
-            Dashboard
-          </Link>
-          <Link underline="hover" color="inherit" href="/employee"  style={{ color: "black" }}>
-            Employee
-          </Link>
           <Link
           underline="none"
             color="inherit"
@@ -107,10 +111,17 @@ const CategoriesTable = () => {
           >
             Holiday
           </Link>
+          <Link
+          underline="none"
+            color="inherit"
+            // href="/holiday"
+          >
+            Holiday list
+          </Link>
         </Breadcrumbs>
 
 
-        <h5> Holidays List</h5>
+        {/* <h5> Holidays List</h5> */}
         <div>
           <button
             className="createCategory"
@@ -122,8 +133,8 @@ const CategoriesTable = () => {
       </div>
 
       <div className="table-data">
-        <div className="search-bar">
-          <input type="search" name="search" placeholder="Search ..." />
+      <div className="search-bar">
+          <TextField type="search" label="Search" variant="outlined" />
         </div>
         <table>
           <thead>
@@ -176,8 +187,8 @@ const CategoriesTable = () => {
           </select>
 
           <span>
-            <i className="fas fa-angle-left"></i>
-            <i className="fas fa-angle-right"></i>
+            <i className="fas fa-angle-left navigate-arrow" onClick={handlePrevPage} style={{marginRight:"6px"}}></i>
+            <i className="fas fa-angle-right navigate-arrow" onClick={handleNextPage}></i>
           </span>
         </div>
       </div>
